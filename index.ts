@@ -1,7 +1,7 @@
 import express from "express";
-import routerApi from "./src/core/infrastructure/rest/index";
 import container from "./config/container";
 import { MongoDB } from "./config/mongo.db";
+import routerApi from "./core/router"
 
 const PORT = process.env.SERVER_PORT;
 

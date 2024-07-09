@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
-import { IUseCase } from "../../../core/domain/interface/IUseCase"
-import { IProductRepository } from "../../domain/repository/IProductRepository"
-import { ProductDto } from "../DTO/ProductDto"
+import { IUseCase } from "../../../../core/interfaces/IUseCase"
+import { IProductRepository } from "../../../domain/repository/IProductRepository"
+import { ProductDto } from "../../../application/DTOs/product/ProductDto"
 import "reflect-metadata";
 
 @injectable()

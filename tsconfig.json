@@ -13,6 +13,10 @@
       "emitDecoratorMetadata": true,
       "types": ["reflect-metadata"]
     },
-    "include": ["src/**/*.ts"],
+    "include": [
+      "src/**/*.ts",
+      "config/*.ts",
+      "core/***.ts"
+    ],
     "exclude": ["node_modules"]
 }

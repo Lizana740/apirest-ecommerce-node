@@ -1,9 +1,9 @@
-import { ProductAddUseCase } from "../../application/useCase/ProductAddUseCase"
 import { Response, Request} from "express"
 import { injectable } from "inversify"
-import { ProductGetAll } from "../../application/useCase/ProductGetAll"
-import { ProductDto } from "../../application/DTO/ProductDto"
-import { ProductDeleteUseCase } from "../../application/useCase/ProductDeleteUseCase"
+import { ProductGetAll } from "../../../application/useCase/product/ProductGetAll"
+import { ProductDto } from "../../../application/DTOs/product/ProductDto"
+import { ProductDeleteUseCase } from "../../../application/useCase/product/ProductDeleteUseCase"
+import { ProductAddUseCase } from "../../../application/useCase/product/ProductAddUseCase"
 
 @injectable()
 export class ProductController{

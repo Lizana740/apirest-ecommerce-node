@@ -1,4 +1,5 @@
-import { Product } from "../entity/Product";
+import { Product } from "../entity/Product"
+
 
 export interface IProductRepository {
     getProductById(id:number):Promise<Product>

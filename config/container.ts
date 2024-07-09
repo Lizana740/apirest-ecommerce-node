@@ -2,14 +2,12 @@ import "reflect-metadata"
 import { Container } from "inversify"
 import {MongoDB} from "./mongo.db"
 
-import { IProductRepository } from "../src/product/domain/repository/IProductRepository";
-import {ProductRepositoryImplement} from "../src/product/infrastructure/repository/ProductRepositoryImplement"
-import { ProductAddUseCase } from "../src/product/application/useCase/ProductAddUseCase";
-import { ProductController } from "../src/product/infrastructure/rest/ProductController";
-import { ProductGetAll } from "../src/product/application/useCase/ProductGetAll";
-import { MongoClient } from "mongodb";
-import { ProductDeleteUseCase } from "../src/product/application/useCase/ProductDeleteUseCase";
-
+import { IProductRepository } from "../src/domain/repository/IProductRepository"
+import {ProductRepositoryImplement} from "../src/infraestructure/repository/ProductRepositoryImplement"
+import { ProductGetAll } from "../src/application/useCase/product/ProductGetAll"
+import { ProductController } from "../src/infraestructure/rest/product/ProductController"
+import { ProductAddUseCase } from "../src/application/useCase/product/ProductAddUseCase"
+import { ProductDeleteUseCase } from "../src/application/useCase/product/ProductDeleteUseCase"
 
 const container = new Container()
 

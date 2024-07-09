@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify";
-import { IUseCase } from "../../../core/domain/interface/IUseCase";
-import { IProductRepository } from "../../domain/repository/IProductRepository";
-
+import { IProductRepository } from "../../../domain/repository/IProductRepository";
+import {IUseCase} from "../../../../core/interfaces/IUseCase"
 @injectable()
 export class ProductDeleteUseCase implements IUseCase{
     

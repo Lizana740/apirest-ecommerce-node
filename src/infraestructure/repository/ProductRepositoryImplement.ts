@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
-import { MongoDB } from "../../../../config/mongo.db";
+import { MongoDB } from "../../../config/mongo.db";
 import { Product } from "../../domain/entity/Product";
-import { IProductRepository } from "../../domain/repository/IProductRepository";
 import { ObjectId } from "mongodb";
+import { IProductRepository } from "../../domain/repository/IProductRepository";
 
 @injectable()
 export class ProductRepositoryImplement implements IProductRepository{
