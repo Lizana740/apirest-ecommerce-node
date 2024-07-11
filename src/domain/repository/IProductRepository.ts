@@ -1,13 +1,6 @@
 import { Product } from "../entity/Product"
+import {IRepository} from "../interface/IRepository"
 
-
-export interface IProductRepository {
-    getProductById(id:number):Promise<Product>
-    getAllProduct():Promise<Product[]>
-    deleteProductById(id:string):Promise<void>
-    updateProductById(product:Product):Promise<void>
-    addProduct(
-        name:string,
-        quantity:number,
-        description:string):Promise<void>
+export interface IProductRepository extends IRepository<Product, String>{
+    add(p:Product):Promise<void>
 }

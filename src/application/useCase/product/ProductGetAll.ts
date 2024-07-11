@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify"
 import { IProductRepository } from "../../../domain/repository/IProductRepository"
-import { IUseCase } from "../../../../core/interfaces/IUseCase"
+import { IUseCase } from "../../interface/IUseCase"
 
 @injectable()
 export class ProductGetAll implements IUseCase{
@@ -9,7 +9,7 @@ export class ProductGetAll implements IUseCase{
     ){}
 
     async execute() {
-        return this.productRepository.getAllProduct() 
+        return this.productRepository.getAll() 
     }
     
 }

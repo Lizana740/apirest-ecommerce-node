@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
-import { IUseCase } from "../../../../core/interfaces/IUseCase"
+import { IUseCase } from "../../interface/IUseCase"
 import { IProductRepository } from "../../../domain/repository/IProductRepository"
 import { ProductDto } from "../../../application/DTOs/product/ProductDto"
-import "reflect-metadata";
+import { Product } from "../../../domain/entity/Product";
 
 @injectable()
 export class ProductAddUseCase implements IUseCase{
@@ -13,6 +13,7 @@ export class ProductAddUseCase implements IUseCase{
 
     async execute(product:ProductDto) {
         const {name, quantity, description}= product
-        this.productRepository.addProduct(name, quantity, description)
+        const p = new Product(undefined, name, quantity, description)
+        return this.productRepository.add(p)
     }
 }

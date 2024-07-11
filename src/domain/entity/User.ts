@@ -1,9 +1,14 @@
-export class User {
+import { ObjectId } from "mongodb"
+import { Entity } from "../interface/Entity"
+
+export class User implements Entity{
     constructor(
+        public _id:ObjectId| any,
         private name:String,
         private lastName:String,
         private email:String
-    ){}
+    ){
+    }
 
     set setName(name:string){
         this.name = name

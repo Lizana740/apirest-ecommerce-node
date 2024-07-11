@@ -1,6 +1,7 @@
 import { inject, injectable } from "inversify";
 import { IProductRepository } from "../../../domain/repository/IProductRepository";
-import {IUseCase} from "../../../../core/interfaces/IUseCase"
+import {IUseCase} from "../../interface/IUseCase"
+
 @injectable()
 export class ProductDeleteUseCase implements IUseCase{
     
@@ -9,7 +10,7 @@ export class ProductDeleteUseCase implements IUseCase{
     ){}
 
     async execute(idProduct : string) {
-        return this.productRepository.deleteProductById(idProduct)
+        return this.productRepository.deleteById(idProduct)
     }
 
 }
