@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { IUseCase } from "../../interface/IUseCase"
 import { IProductRepository } from "../../../domain/repository/IProductRepository"
-import { ProductDto } from "../../../application/DTOs/product/ProductDto"
+import { ProductDto } from "../../../domain/DTOs/product/ProductDto"
 import { Product } from "../../../domain/entity/Product";
 
 @injectable()

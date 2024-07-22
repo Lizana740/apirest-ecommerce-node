@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { IUseCase } from "../../interface/IUseCase";
 import { IProductRepository } from "../../../domain/repository/IProductRepository";
-import { ArrayFilter } from "../../DTOs/FilterParam";
+import { ArrayFilter } from "../../../domain/DTOs/FilterParam";
 @injectable()
 export class ProductFilterUseCase implements IUseCase{
 

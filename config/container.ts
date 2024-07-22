@@ -1,9 +1,9 @@
 import "reflect-metadata"
 import { Container } from "inversify"
-import {MongoDB} from "./mongo.db"
+import { MongoDB } from "./mongo.db"
 
 import { IProductRepository } from "../src/domain/repository/IProductRepository"
-import {ProductRepositoryImplement} from "../src/infraestructure/repository/ProductRepositoryImplement"
+import { ProductRepositoryImplement } from "../src/infraestructure/repository/ProductRepositoryImplement"
 import { ProductGetAll } from "../src/application/useCase/product/ProductGetAll"
 import { ProductController } from "../src/infraestructure/rest/product/ProductController"
 import { ProductAddUseCase } from "../src/application/useCase/product/ProductAddUseCase"
@@ -21,28 +21,36 @@ import { ProductFilterUseCase } from "../src/application/useCase/product/Product
 const container = new Container()
 
 /***  DI DATABASE ***/
-container.bind<MongoDB>(MongoDB).toConstantValue(new MongoDB())
+container
+    .bind<MongoDB>(MongoDB)
+    .toConstantValue(new MongoDB(process.env.MONGODB ?? "error"))
 
 /***  DI REPOSITORY ***/
-container.bind<IProductRepository>('IProductRepository').to(ProductRepositoryImplement)
-container.bind<IUserRepository>('IUserRepository').to(UserRepositoryImplement)
+container
+    .bind<IProductRepository>("IProductRepository")
+    .to(ProductRepositoryImplement)
+container.bind<IUserRepository>("IUserRepository").to(UserRepositoryImplement)
 
 /***  DI USE CASE ***/
 
 //->>[PRODUCT]<<-//
 container.bind<ProductAddUseCase>(ProductAddUseCase).to(ProductAddUseCase)
 container.bind<ProductGetAll>(ProductGetAll).to(ProductGetAll)
-container.bind<ProductDeleteUseCase>(ProductDeleteUseCase).to(ProductDeleteUseCase)
-container.bind<ProductGetByIdUseCase>(ProductGetByIdUseCase).to(ProductGetByIdUseCase)
-container.bind<ProductFilterUseCase>(ProductFilterUseCase).to(ProductFilterUseCase)
+container
+    .bind<ProductDeleteUseCase>(ProductDeleteUseCase)
+    .to(ProductDeleteUseCase)
+container
+    .bind<ProductGetByIdUseCase>(ProductGetByIdUseCase)
+    .to(ProductGetByIdUseCase)
+container
+    .bind<ProductFilterUseCase>(ProductFilterUseCase)
+    .to(ProductFilterUseCase)
 
 //->>[USER]<<-/User/
 container.bind<UserAddUseCase>(UserAddUseCase).to(UserAddUseCase)
 container.bind<UserGetAll>(UserGetAll).to(UserGetAll)
 container.bind<UserGetByIdUseCase>(UserGetByIdUseCase).to(UserGetByIdUseCase)
 container.bind<UserDeleteUseCase>(UserDeleteUseCase).to(UserDeleteUseCase)
-
-
 
 /***  DI CONTROLLER ***/
 container.bind<ProductController>(ProductController).to(ProductController)
