@@ -1,31 +1,63 @@
 import { ObjectId } from "mongodb"
 import { Entity } from "../interface/Entity"
 
-export class Product implements Entity{
+export class Product implements Entity {
     constructor(
-        public _id:ObjectId|any,
-        private name:string,
-        private quantity:number,
-        private description:string
-    ){
+        public _id: ObjectId | any,
+        private name: string,
+        private description: string,
+        private price: number,
+        private quantity: number,
+        private path: string,
+        private category: ObjectId | any,
+        private brand: ObjectId | any
+    ) {}
+    set setBrand(brand: ObjectId) {
+        this.brand = brand
+    }
+    get getBrand() {
+        return this.brand
     }
 
-    set setName(name:string){
+    set setCategory(category: ObjectId) {
+        this.category = category
+    }
+    get getCategory() {
+        return this.category
+    }
+
+    set setPath(path: string) {
+        this.path = path
+    }
+    get getPath() {
+        return this.path
+    }
+
+    set setPrice(price: number) {
+        this.price = price
+    }
+    get getPrice() {
+        return this.price
+    }
+
+    set setName(name: string) {
         this.name = name
     }
-    get getName(){
+    get getName() {
         return this.name
     }
-    set setQuantity(quantity:number){
+
+    set setQuantity(quantity: number) {
         this.quantity = quantity
     }
-    get getQuantity(){
+    get getQuantity() {
         return this.quantity
     }
-    set setDescription(description:string){
+    
+    set setDescription(description: string) {
         this.description = description
     }
-    get getDescription(){
+    get getDescription() {
         return this.description
     }
 }

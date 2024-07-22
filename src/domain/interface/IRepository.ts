@@ -5,6 +5,6 @@ export interface IRepository<T extends Entity,P>{
     getAll():Promise<T[]>
     deleteById(id:P):Promise<void>
     updateById(p:P,ob:T):Promise<void>
-    add(...args:any[]):Promise<void>
+    add(...args:any[]):Promise<P>
     filter(params: any[]):Promise<T[]>
 }

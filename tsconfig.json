@@ -11,12 +11,13 @@
       "moduleResolution": "Node",
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "types": ["reflect-metadata"]
+      "types": ["reflect-metadata", "node","jest"]
     },
     "include": [
       "src/**/*.ts",
       "config/*.ts",
-      "core/***.ts"
-    ],
-    "exclude": ["node_modules"]
+      "core/*.ts",
+      "**/*.test.ts"
+, "test/infrastructure/rest/product.test.ts"    ],
+    "exclude": ["node_modules"],
 }
