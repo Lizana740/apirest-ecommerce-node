@@ -8,6 +8,7 @@ const initialDb = async () => {
     await mongo.connect()
     await mongo.conection.dropCollection(NameCollection.product)
     await mongo.conection.dropCollection(NameCollection.user)
+    await mongo.conection.dropCollection(NameCollection.category)
 
     await mongo.conection.createCollection(NameCollection.product, {
         validator: {
@@ -69,9 +70,33 @@ const initialDb = async () => {
             },
         },
     })
+
     await mongo.conection
         .collection(NameCollection.user)
         .createIndex({ email: 1 }, { unique: true })
+
+    await mongo.conection.createCollection(NameCollection.category, {
+        validator: {
+            $jsonSchema: {
+                bsonType: "object",
+                required: [
+                    "name",
+                    "description"
+                ],
+                properties: {
+                    name: {
+                        bsonType: "string",
+                    },
+                    description: {
+                        bsonType: "string",
+                    },
+                },
+            },
+        },
+    })
+    await mongo.conection
+    .collection(NameCollection.category)
+    .createIndex({ name: 1 }, { unique: true })
 }
 
 initialDb()

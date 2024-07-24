@@ -20,6 +20,15 @@ import { ProductFilterUseCase } from "../src/application/useCase/product/Product
 import { UserFilterUseCase } from "../src/application/useCase/user/UserFilterUseCase"
 import { AuthController } from "../src/infraestructure/rest/auth/AuthController"
 import { UserUpdateUseCase } from "../src/application/useCase/user/UserUpdateUseCase"
+import { CategoryRepositoryImplement } from "../src/infraestructure/repository/CategoryRepositoryImplement"
+import { ICategoryRepository } from "../src/domain/repository/ICategoryRepository"
+import { CategoryAddUseCase } from "../src/application/useCase/category/CategoryAddUseCase"
+import { CategoryGetAll } from "../src/application/useCase/category/CategoryGetAll"
+import { CategoryGetByIdUseCase } from "../src/application/useCase/category/CategoryGetByIdUseCase"
+import { CategoryDeleteUseCase } from "../src/application/useCase/category/CategoryDeleteUseCase"
+import { CategoryFilterUseCase } from "../src/application/useCase/category/CategoryFilterUseCase"
+import { CategoryUpdateUseCase } from "../src/application/useCase/category/CategoryUpdateUseCase"
+import { CategoryController } from "../src/infraestructure/rest/category/CategoryController"
 
 const container = new Container()
 
@@ -33,6 +42,9 @@ container
     .bind<IProductRepository>("IProductRepository")
     .to(ProductRepositoryImplement)
 container.bind<IUserRepository>("IUserRepository").to(UserRepositoryImplement)
+container
+    .bind<ICategoryRepository>("ICategoryRepository")
+    .to(CategoryRepositoryImplement)
 
 /***  DI USE CASE ***/
 
@@ -57,9 +69,26 @@ container.bind<UserDeleteUseCase>(UserDeleteUseCase).to(UserDeleteUseCase)
 container.bind<UserFilterUseCase>(UserFilterUseCase).to(UserFilterUseCase)
 container.bind<UserUpdateUseCase>(UserUpdateUseCase).to(UserUpdateUseCase)
 
+//->>[CATEGORY]<<-/Category/
+container.bind<CategoryAddUseCase>(CategoryAddUseCase).to(CategoryAddUseCase)
+container.bind<CategoryGetAll>(CategoryGetAll).to(CategoryGetAll)
+container
+    .bind<CategoryGetByIdUseCase>(CategoryGetByIdUseCase)
+    .to(CategoryGetByIdUseCase)
+container
+    .bind<CategoryDeleteUseCase>(CategoryDeleteUseCase)
+    .to(CategoryDeleteUseCase)
+container
+    .bind<CategoryFilterUseCase>(CategoryFilterUseCase)
+    .to(CategoryFilterUseCase)
+container
+    .bind<CategoryUpdateUseCase>(CategoryUpdateUseCase)
+    .to(CategoryUpdateUseCase)
+
 /***  DI CONTROLLER ***/
 container.bind<ProductController>(ProductController).to(ProductController)
 container.bind<UserController>(UserController).to(UserController)
+container.bind<CategoryController>(CategoryController).to(CategoryController)
 container.bind<AuthController>(AuthController).to(AuthController)
 
 export default container

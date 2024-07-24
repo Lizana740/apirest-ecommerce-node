@@ -1,9 +1,7 @@
 import { inject, injectable } from "inversify"
 import { IUseCase } from "../../interface/IUseCase"
 import { IUserRepository } from "../../../domain/repository/IUserRepository"
-import { UserDto } from "../../DTOs/UserDto"
 import { User } from "../../../domain/entity/User"
-import { FormUserCreate } from "../../DTOs/FormUserCreate"
 
 @injectable()
 export class UserAddUseCase implements IUseCase {

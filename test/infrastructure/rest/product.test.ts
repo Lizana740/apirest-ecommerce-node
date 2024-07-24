@@ -1,6 +1,7 @@
 import main from "../../../src/app"
 import request from "supertest"
 import { ProductDto } from "../../../src/application/DTOs/product/ProductDto"
+import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
 
 describe("Product [REST::CONTROLLER]", () => {
     let app!: any
@@ -31,8 +32,9 @@ describe("Product [REST::CONTROLLER]", () => {
     })
 
     it("GET /api/product/:id", async () => {
-        const response = await request(app).get("/api/product/12")
+        const response = await request(app).get("/api/product/66a13cee8ff6cd707b077582")
         expect(response.status).toBe(401)
-        expect(response.body.error).toBeTruthy()
+        const error = new NotFoundElement()
+        expect(response.body.error).toBe(error.name)
     })
 })
