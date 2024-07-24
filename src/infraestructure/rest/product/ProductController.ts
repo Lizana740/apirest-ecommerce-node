@@ -8,6 +8,7 @@ import { ProductGetByIdUseCase } from "../../../application/useCase/product/Prod
 import { ProductFilterUseCase } from "../../../application/useCase/product/ProductFilterUseCase"
 import { ArrayFilter } from "../../../application/DTOs/FilterParam"
 import { makeErrorResponse, makeResponse } from "../../utils/makeResponses"
+import { NotFoundElement } from "../../exceptions/NotFoundElement"
 
 @injectable()
 export class ProductController {
@@ -34,6 +35,9 @@ export class ProductController {
     try {
       const { id } = req.params
       const p = await this.productGetById.execute(id)
+      if(!p){
+        throw new NotFoundElement()
+      }
       res.json(makeResponse(p, "Producto obtenido con éxito!!"))
     } catch (e) {
       res

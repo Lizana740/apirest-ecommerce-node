@@ -4,6 +4,7 @@ import { FormUserCreate } from "../../../src/application/DTOs/FormUserCreate"
 import { ValidationError } from "../../../src/infraestructure/exceptions/ValidationError"
 import { Validate } from "../../../src/infraestructure/utils/Validate"
 import { makeErrorResponse } from "../../../src/infraestructure/utils/makeResponses"
+import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
 
 describe("User [REST::CONTROLLER]", () => {
     let app!: any
@@ -39,9 +40,10 @@ describe("User [REST::CONTROLLER]", () => {
     })
 
     it("GET /api/user/:id", async () => {
-        const response = await request(app).get("/api/user/12")
+        const response = await request(app).get("/api/user/66a13cee8ff6cd707b077582")
         expect(response.status).toBe(401)
-        expect(response.body.error).toBeTruthy()
+        const error = new NotFoundElement()
+        expect(response.body.error).toBe(error.name)
     })
 
     it("DELETE /api/user/:id", async () => {

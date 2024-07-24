@@ -59,9 +59,12 @@ export abstract class ARepositoryImplements<E extends Entity, P>
         throw new Error("")
     }
 
-    async getById(id: P): Promise<E> {
+    async getById(id: P): Promise<E|null> {
         const p = await this.getCollection().findOne(this.formatPrimary(id))
-        return this.mapperEntity(p)
+        if(p){
+            return this.mapperEntity(p)
+        }
+        return null
     }
 
     async updateById(id: P, ob: E): Promise<void> {

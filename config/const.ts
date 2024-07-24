@@ -1,4 +1,5 @@
 export const NameCollection = {
-  product: "product",
-  user: "user",
-};
+    product: "product",
+    user: "user",
+    category: "category",
+}

@@ -14,6 +14,7 @@ import { UserNotFound } from "../../exceptions/UserNotFound"
 import { UserDto } from "../../../application/DTOs/UserDto"
 import { UserUpdateUseCase } from "../../../application/useCase/user/UserUpdateUseCase"
 import { MongoServerError } from "mongodb"
+import { NotFoundElement } from "../../exceptions/NotFoundElement"
 
 @injectable()
 export class UserController {
@@ -53,6 +54,9 @@ export class UserController {
         try {
             const { id } = req.params
             const p = await this.userGetById.execute(id)
+            if(!p){
+                throw new NotFoundElement()
+            }
             res.status(200).json(makeResponse(p))
         } catch (e) {
             res.status(401).json(makeErrorResponse(e))

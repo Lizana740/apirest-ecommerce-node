@@ -1,7 +1,7 @@
 import { Entity } from "./Entity"
 
 export interface IRepository<T extends Entity, P> {
-    getById(id: P): Promise<T>
+    getById(id: P): Promise<T|null>
     getAll(): Promise<T[]>
     deleteById(id: P): Promise<void>
     updateById(p: P, ob: T): Promise<void>

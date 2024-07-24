@@ -1,7 +1,6 @@
 import { inject, injectable } from "inversify"
 import { User } from "../../../domain/entity/User"
 import { IUserRepository } from "../../../domain/repository/IUserRepository"
-import { UserDto } from "../../DTOs/UserDto"
 import { IUseCase } from "../../interface/IUseCase"
 
 @injectable()
