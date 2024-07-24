@@ -1,6 +1,6 @@
 export interface FilterParam {
   property: string
-  value: undefined
+  value: string 
   operator: string
 }
 

@@ -3,6 +3,9 @@ import { MongoDB } from "../../../config/mongo.db"
 import { IRepository } from "../../domain/interface/IRepository"
 import { Entity } from "../../domain/interface/Entity"
 import { NameCollection } from "../../../config/const"
+import { FilterParam } from "../../application/DTOs/FilterParam"
+import { MongoServerError } from "mongodb"
+import { IndexDuplicate } from "../exceptions/IndexDuplicate"
 
 @injectable()
 export abstract class ARepositoryImplements<E extends Entity, P>
@@ -20,6 +23,7 @@ export abstract class ARepositoryImplements<E extends Entity, P>
     }
 
     abstract formatPrimary(id: P): any
+    abstract mapperEntity(document: any): E
 
     private getCollection() {
         return this.mongodb.conection.collection(this.nameCollection)
@@ -28,7 +32,7 @@ export abstract class ARepositoryImplements<E extends Entity, P>
     async getAll(): Promise<E[]> {
         const collection = this.getCollection()
         const list = await collection.find().toArray()
-        return list as any as E[]
+        return list.map((item) => this.mapperEntity(item))
     }
 
     async deleteById(id: P): Promise<void> {
@@ -40,19 +44,24 @@ export abstract class ARepositoryImplements<E extends Entity, P>
     }
 
     async add(e: E): Promise<P> {
-        if (e instanceof Object) {
-            const collection = this.getCollection()
-            const insert = await collection.insertOne(e)
-            const p = insert.insertedId
-            return p as any as P
-        }else{
-          throw new Error("No se puede ingresar")
+        try {
+            if (e instanceof Object) {
+                const collection = this.getCollection()
+                const insert = await collection.insertOne(e)
+                const p = insert.insertedId
+                return p as any as P
+            }
+        } catch (e) {
+            if (e instanceof MongoServerError) {
+                throw new IndexDuplicate()
+            }
         }
+        throw new Error("")
     }
 
     async getById(id: P): Promise<E> {
         const p = await this.getCollection().findOne(this.formatPrimary(id))
-        return p as any as E
+        return this.mapperEntity(p)
     }
 
     async updateById(id: P, ob: E): Promise<void> {
@@ -64,13 +73,17 @@ export abstract class ARepositoryImplements<E extends Entity, P>
         }
     }
 
-    async filter(params: any[]): Promise<E[]> {
-        const abj = { ...params }
-        const l = await this.getCollection().find(params).toArray()
-        return l as any as E[]
-    }
+    async filter(params: FilterParam[]): Promise<E[]> {
+        let abj: any = {}
 
-    /*     setNameCollection(name:Collection){
-        this.nameCollection = name
-    } */
+        params.forEach(({ property, value, operator }) => {
+            abj = {
+                ...abj,
+            }
+            abj[property] = {}
+            abj[property][operator] = value
+        })
+        const l = await this.getCollection().find(abj).toArray()
+        return l.map((item) => this.mapperEntity(item))
+    }
 }

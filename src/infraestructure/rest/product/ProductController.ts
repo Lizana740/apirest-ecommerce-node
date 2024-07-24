@@ -1,12 +1,12 @@
 import { Response, Request } from "express"
 import { injectable } from "inversify"
 import { ProductGetAll } from "../../../application/useCase/product/ProductGetAll"
-import { ProductDto } from "../../../domain/DTOs/product/ProductDto"
+import { ProductDto } from "../../../application/DTOs/product/ProductDto"
 import { ProductDeleteUseCase } from "../../../application/useCase/product/ProductDeleteUseCase"
 import { ProductAddUseCase } from "../../../application/useCase/product/ProductAddUseCase"
 import { ProductGetByIdUseCase } from "../../../application/useCase/product/ProductGetByIdUseCase"
 import { ProductFilterUseCase } from "../../../application/useCase/product/ProductFilterUseCase"
-import { ArrayFilter } from "../../../domain/DTOs/FilterParam"
+import { ArrayFilter } from "../../../application/DTOs/FilterParam"
 import { makeErrorResponse, makeResponse } from "../../utils/makeResponses"
 
 @injectable()

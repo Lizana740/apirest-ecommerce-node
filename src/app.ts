@@ -6,20 +6,22 @@ import { Logger } from "../src/infraestructure/logger/Logger"
 
 const dataBaseMongo = container.get<MongoDB>(MongoDB)
 
-const main = async () => {
+const main = async (consol: boolean = false) => {
     try {
         await dataBaseMongo.connect()
-        console.log("[OK] --> Conection MongoDB")
+        if (consol) {
+            console.log("[OK] --> Conection MongoDB")
+        }
         const app = express()
-        const logger = new Logger()
+        const logger = new Logger(consol)
         app.use(express.json())
         app.use(logger.register.bind(logger))
         app.use("/api", routerApi)
-        
-        app.get('/', (req:any, res:any) =>{
+
+        app.get("/", (req: any, res: any) => {
             res.send("Application runing!!")
         })
-        
+
         return app
     } catch (e: any) {
         if (e instanceof RangeError) {
