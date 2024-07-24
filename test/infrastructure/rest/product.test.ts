@@ -1,6 +1,6 @@
 import main from "../../../src/app"
 import request from "supertest"
-import { ProductDto } from "../../../src/domain/DTOs/product/ProductDto"
+import { ProductDto } from "../../../src/application/DTOs/product/ProductDto"
 
 describe("Product [REST::CONTROLLER]", () => {
     let app!: any
@@ -20,6 +20,9 @@ describe("Product [REST::CONTROLLER]", () => {
             description: "description",
             name: "producto test",
             quantity: 100,
+            brand:"",
+            category:"",
+            price:100
         }
         const response = await request(app).post("/api/product").send(produtc)
         expect(response.status).toBe(201)

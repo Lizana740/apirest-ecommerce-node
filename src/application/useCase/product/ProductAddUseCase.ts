@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 import { IUseCase } from "../../interface/IUseCase"
 import { IProductRepository } from "../../../domain/repository/IProductRepository"
-import { ProductDto } from "../../../domain/DTOs/product/ProductDto"
+import { ProductDto } from "../../DTOs/product/ProductDto"
 import { Product } from "../../../domain/entity/Product";
 
 @injectable()
@@ -12,8 +12,8 @@ export class ProductAddUseCase implements IUseCase{
     ){}
 
     async execute(product:ProductDto) {
-        const {name, quantity, description}= product
-        const p = new Product(undefined, name, quantity, description)
+        const {name, quantity, description,price}= product
+        const p = new Product(null, name,description,price,quantity,"","","")
         return this.productRepository.add(p)
     }
 }

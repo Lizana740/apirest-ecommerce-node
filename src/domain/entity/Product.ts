@@ -2,15 +2,17 @@ import { ObjectId } from "mongodb"
 import { Entity } from "../interface/Entity"
 
 export class Product implements Entity {
+    
+
     constructor(
         public _id: ObjectId | any,
-        private name: string,
-        private description: string,
-        private price: number,
-        private quantity: number,
-        private path: string,
-        private category: ObjectId | any,
-        private brand: ObjectId | any
+        private name: string="",
+        private description: string="",
+        private price: number=0,
+        private quantity: number=0,
+        private path: string="",
+        private category: ObjectId | any = null,
+        private brand: ObjectId | any = null
     ) {}
     set setBrand(brand: ObjectId) {
         this.brand = brand

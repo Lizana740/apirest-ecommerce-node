@@ -17,6 +17,9 @@ import { UserGetByIdUseCase } from "../src/application/useCase/user/UserGetByIdU
 import { UserDeleteUseCase } from "../src/application/useCase/user/UserDeleteUseCase"
 import { UserController } from "../src/infraestructure/rest/user/UserController"
 import { ProductFilterUseCase } from "../src/application/useCase/product/ProductFilterUseCase"
+import { UserFilterUseCase } from "../src/application/useCase/user/UserFilterUseCase"
+import { AuthController } from "../src/infraestructure/rest/auth/AuthController"
+import { UserUpdateUseCase } from "../src/application/useCase/user/UserUpdateUseCase"
 
 const container = new Container()
 
@@ -51,9 +54,12 @@ container.bind<UserAddUseCase>(UserAddUseCase).to(UserAddUseCase)
 container.bind<UserGetAll>(UserGetAll).to(UserGetAll)
 container.bind<UserGetByIdUseCase>(UserGetByIdUseCase).to(UserGetByIdUseCase)
 container.bind<UserDeleteUseCase>(UserDeleteUseCase).to(UserDeleteUseCase)
+container.bind<UserFilterUseCase>(UserFilterUseCase).to(UserFilterUseCase)
+container.bind<UserUpdateUseCase>(UserUpdateUseCase).to(UserUpdateUseCase)
 
 /***  DI CONTROLLER ***/
 container.bind<ProductController>(ProductController).to(ProductController)
 container.bind<UserController>(UserController).to(UserController)
+container.bind<AuthController>(AuthController).to(AuthController)
 
 export default container

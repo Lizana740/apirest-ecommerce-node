@@ -1,18 +1,16 @@
 import { inject, injectable } from "inversify"
 import { IUseCase } from "../../interface/IUseCase"
+import { ArrayFilter } from "../../DTOs/FilterParam"
 import { IUserRepository } from "../../../domain/repository/IUserRepository"
-import { UserDto } from "../../DTOs/UserDto"
 import { User } from "../../../domain/entity/User"
-import { FormUserCreate } from "../../DTOs/FormUserCreate"
-
 @injectable()
-export class UserAddUseCase implements IUseCase {
+export class UserFilterUseCase implements IUseCase {
     constructor(
         @inject("IUserRepository")
         private readonly userRepository: IUserRepository
     ) {}
 
-    async execute(p: User) {
-        return this.userRepository.add(p)
+    async execute(array: ArrayFilter): Promise<User[]> {
+        return this.userRepository.filter(array.params)
     }
 }
