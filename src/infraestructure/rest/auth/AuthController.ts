@@ -6,7 +6,7 @@ import { FormLogin } from "../../../application/DTOs/FormLogin"
 import { ArrayFilter } from "../../../application/DTOs/FilterParam"
 import bycrypt from "bcrypt"
 import { Validate } from "../../utils/Validate"
-import { UserNotFound } from "../../exceptions/UserNotFound"
+import { UserNotFound } from "../../../application/exceptions/UserNotFound"
 import { IncorrectPassword } from "../../exceptions/IncorrectPassword"
 
 @injectable()
@@ -18,7 +18,7 @@ export class AuthController {
     async login(req: Request, res: Response) {
         try {
             const form: FormLogin = Validate.validate(FormLogin, req.body)
-            const arrayFilter: ArrayFilter = {
+            const arrayFilter: ArrayFilter = Validate.validate(ArrayFilter,{
                 params: [
                     {
                         property: "email",
@@ -26,7 +26,7 @@ export class AuthController {
                         operator: "$eq",
                     },
                 ],
-            }
+            })
 
             const user = await this.userFilterUseCase.execute(arrayFilter)
             if (user.length == 0) {

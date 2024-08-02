@@ -11,6 +11,6 @@ export class UserFilterUseCase implements IUseCase {
     ) {}
 
     async execute(array: ArrayFilter): Promise<User[]> {
-        return this.userRepository.filter(array.params)
+        return await this.userRepository.filter(array.params)
     }
 }

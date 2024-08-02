@@ -11,6 +11,6 @@ export class UserAddUseCase implements IUseCase {
     ) {}
 
     async execute(p: User) {
-        return this.userRepository.add(p)
+        return await this.userRepository.add(p)
     }
 }

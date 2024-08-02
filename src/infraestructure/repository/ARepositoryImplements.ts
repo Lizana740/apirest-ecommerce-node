@@ -4,8 +4,6 @@ import { IRepository } from "../../domain/interface/IRepository"
 import { Entity } from "../../domain/interface/Entity"
 import { NameCollection } from "../../../config/const"
 import { FilterParam } from "../../application/DTOs/FilterParam"
-import { MongoServerError } from "mongodb"
-import { IndexDuplicate } from "../exceptions/IndexDuplicate"
 
 @injectable()
 export abstract class ARepositoryImplements<E extends Entity, P>
@@ -52,16 +50,14 @@ export abstract class ARepositoryImplements<E extends Entity, P>
                 return p as any as P
             }
         } catch (e) {
-            if (e instanceof MongoServerError) {
-                throw new IndexDuplicate()
-            }
+            throw e
         }
-        throw new Error("")
+        throw new Error("Error not defined")
     }
 
-    async getById(id: P): Promise<E|null> {
+    async getById(id: P): Promise<E | null> {
         const p = await this.getCollection().findOne(this.formatPrimary(id))
-        if(p){
+        if (p) {
             return this.mapperEntity(p)
         }
         return null

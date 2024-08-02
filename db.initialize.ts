@@ -9,6 +9,7 @@ const initialDb = async () => {
     await mongo.conection.dropCollection(NameCollection.product)
     await mongo.conection.dropCollection(NameCollection.user)
     await mongo.conection.dropCollection(NameCollection.category)
+    await mongo.conection.dropCollection(NameCollection.review)
 
     await mongo.conection.createCollection(NameCollection.product, {
         validator: {
@@ -79,10 +80,7 @@ const initialDb = async () => {
         validator: {
             $jsonSchema: {
                 bsonType: "object",
-                required: [
-                    "name",
-                    "description"
-                ],
+                required: ["name", "description"],
                 properties: {
                     name: {
                         bsonType: "string",
@@ -95,8 +93,42 @@ const initialDb = async () => {
         },
     })
     await mongo.conection
-    .collection(NameCollection.category)
-    .createIndex({ name: 1 }, { unique: true })
+        .collection(NameCollection.category)
+        .createIndex({ name: 1 }, { unique: true })
+
+    await mongo.conection.createCollection(NameCollection.review, {
+        validator: {
+            $jsonSchema: {
+                bsonType: "object",
+                required: ["product_id", "user_id", "coment", "point", "date"],
+                properties: {
+                    point: {
+                        bsonType: "int",
+                        maximum: 5,
+                        minimum: 1,
+                    },
+                    coment: {
+                        bsonType: "string",
+                        minLength: 25,
+                        maxLength: 1000,
+                    },
+                    product_id: {
+                        bsonType: "objectId",
+                    },
+                    user_id: {
+                        bsonType: "objectId",
+                    },
+                    data: {
+                        bsonType: "date",
+                    },
+                },
+            },
+        },
+    })
+    await mongo.conection
+        .collection(NameCollection.review)
+        .createIndex({ product_id: 1, user_id: 1, date: 1 }, { unique: true })
+    
 }
 
 initialDb()

@@ -10,7 +10,7 @@ export class UserGetAll implements IUseCase{
     ){}
 
     async execute() {
-        return this.userRepository.getAll() 
+        return await this.userRepository.getAll() 
     }
     
 }

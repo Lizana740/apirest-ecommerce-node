@@ -29,6 +29,14 @@ import { CategoryDeleteUseCase } from "../src/application/useCase/category/Categ
 import { CategoryFilterUseCase } from "../src/application/useCase/category/CategoryFilterUseCase"
 import { CategoryUpdateUseCase } from "../src/application/useCase/category/CategoryUpdateUseCase"
 import { CategoryController } from "../src/infraestructure/rest/category/CategoryController"
+import { IReviewRepository } from "../src/domain/repository/IReviewRepository"
+import { ReviewRepositoryImplement } from "../src/infraestructure/repository/ReviewRepositoryImplement"
+import { ReviewAddUseCase } from "../src/application/useCase/review/ReviewAddUseCase"
+import { ReviewController } from "../src/infraestructure/rest/review/ReviewController"
+import { ReviewGetAll } from "../src/application/useCase/review/ReviewGetAll"
+import { ReviewFilterUseCase } from "../src/application/useCase/review/ReviewFilterUseCase"
+import { ReviewDeleteUseCase } from "../src/application/useCase/review/ReviewDeleteUseCase"
+import { ReviewGetByIdUseCase } from "../src/application/useCase/review/ReviewGetByIdUseCase"
 
 const container = new Container()
 
@@ -45,6 +53,9 @@ container.bind<IUserRepository>("IUserRepository").to(UserRepositoryImplement)
 container
     .bind<ICategoryRepository>("ICategoryRepository")
     .to(CategoryRepositoryImplement)
+container
+    .bind<IReviewRepository>("IReviewRepository")
+    .to(ReviewRepositoryImplement)
 
 /***  DI USE CASE ***/
 
@@ -85,10 +96,18 @@ container
     .bind<CategoryUpdateUseCase>(CategoryUpdateUseCase)
     .to(CategoryUpdateUseCase)
 
+//->>[REVIEW]<<-/Review/
+container.bind<ReviewAddUseCase>(ReviewAddUseCase).to(ReviewAddUseCase)
+container.bind<ReviewGetAll>(ReviewGetAll).to(ReviewGetAll)
+container.bind<ReviewFilterUseCase>(ReviewFilterUseCase).to(ReviewFilterUseCase)
+container.bind<ReviewDeleteUseCase>(ReviewDeleteUseCase).to(ReviewDeleteUseCase)
+container.bind<ReviewGetByIdUseCase>(ReviewGetByIdUseCase).to(ReviewGetByIdUseCase)
+
 /***  DI CONTROLLER ***/
 container.bind<ProductController>(ProductController).to(ProductController)
 container.bind<UserController>(UserController).to(UserController)
 container.bind<CategoryController>(CategoryController).to(CategoryController)
 container.bind<AuthController>(AuthController).to(AuthController)
+container.bind<ReviewController>(ReviewController).to(ReviewController)
 
 export default container

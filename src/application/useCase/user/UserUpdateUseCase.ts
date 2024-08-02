@@ -10,7 +10,7 @@ export class UserUpdateUseCase implements IUseCase {
         private readonly userRepository: IUserRepository
     ) {}
 
-    execute(id: string, user: User): Promise<void> {
-        return this.userRepository.updateById(id, user)
+    async execute(id: string, user: User): Promise<void> {
+        return await this.userRepository.updateById(id, user)
     }
 }
