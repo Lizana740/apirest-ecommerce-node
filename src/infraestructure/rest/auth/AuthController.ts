@@ -8,6 +8,7 @@ import bycrypt from "bcrypt"
 import { Validate } from "../../utils/Validate"
 import { UserNotFound } from "../../exceptions/UserNotFound"
 import { IncorrectPassword } from "../../exceptions/IncorrectPassword"
+import jwt from 'jsonwebtoken';
 
 @injectable()
 export class AuthController {
@@ -40,11 +41,12 @@ export class AuthController {
             const password = form.password
 
             const isValid = bycrypt.compareSync(password, hash)
+
             if (!isValid) {
                 throw new IncorrectPassword()
             }
-
-            res.json(makeResponse({ token: isValid }))
+            const token = jwt.sign({id:u._id}, process.env.JWT_KEY!,{ expiresIn: '1h' })
+            res.json(makeResponse({ token: token }))
         } catch (e: any) {
             res.status(401).json(makeErrorResponse(e))
         }

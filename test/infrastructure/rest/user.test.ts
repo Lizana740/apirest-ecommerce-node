@@ -1,7 +1,6 @@
 import main from "../../../src/app"
 import request from "supertest"
 import { FormUserCreate } from "../../../src/application/DTOs/FormUserCreate"
-import { ValidationError } from "../../../src/infraestructure/exceptions/ValidationError"
 import { Validate } from "../../../src/infraestructure/utils/Validate"
 import { makeErrorResponse } from "../../../src/infraestructure/utils/makeResponses"
 import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
