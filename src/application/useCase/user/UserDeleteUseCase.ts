@@ -10,6 +10,6 @@ export class UserDeleteUseCase implements IUseCase {
     ) {}
 
     async execute(idUser: string) {
-        return this.userRepository.deleteById(idUser)
+        return await this.userRepository.deleteById(idUser)
     }
 }
