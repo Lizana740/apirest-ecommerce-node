@@ -1,9 +1,12 @@
 import express from "express"
 import { ProductController } from "./ProductController"
 import container from "../../../../config/container"
+import { CreateUserNotifierEmail } from "../../../application/events/CreateUserNotifierEmail"
 const routerProduct = express.Router()
 
 const controller = container.get(ProductController)
+const eventBus = container.get(CreateUserNotifierEmail)
+
 
 routerProduct.post("/", controller.addProduct.bind(controller))
 routerProduct.get("/all", controller.getAllProduct.bind(controller))

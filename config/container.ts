@@ -37,6 +37,9 @@ import { ReviewGetAll } from "../src/application/useCase/review/ReviewGetAll"
 import { ReviewFilterUseCase } from "../src/application/useCase/review/ReviewFilterUseCase"
 import { ReviewDeleteUseCase } from "../src/application/useCase/review/ReviewDeleteUseCase"
 import { ReviewGetByIdUseCase } from "../src/application/useCase/review/ReviewGetByIdUseCase"
+import { EventBus } from "../src/domain/interface/EventBus"
+import { EventBusImpl } from "../src/infraestructure/events/EventBusImpl"
+import { CreateUserNotifierEmail } from "../src/application/events/CreateUserNotifierEmail"
 
 const container = new Container()
 
@@ -44,6 +47,11 @@ const container = new Container()
 container
     .bind<MongoDB>(MongoDB)
     .toConstantValue(new MongoDB(process.env.MONGODB ?? "error"))
+
+/***  DI EventBus ***/
+container.bind<EventBus>("EventBus").toConstantValue(new EventBusImpl())
+container.bind<CreateUserNotifierEmail>(CreateUserNotifierEmail).toSelf()
+
 
 /***  DI REPOSITORY ***/
 container

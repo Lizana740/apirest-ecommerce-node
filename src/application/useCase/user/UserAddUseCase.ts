@@ -8,9 +8,11 @@ export class UserAddUseCase implements IUseCase {
     constructor(
         @inject("IUserRepository")
         private readonly userRepository: IUserRepository
+        
     ) {}
 
     async execute(p: User) {
-        return await this.userRepository.add(p)
+        const r = await this.userRepository.add(p)
+        return r 
     }
 }
