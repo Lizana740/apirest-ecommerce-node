@@ -1,10 +1,10 @@
 import main from "../../../src/app"
 import request from "supertest"
-import { FormUserCreate } from "../../../src/application/DTOs/FormUserCreate"
+import { FormUserCreate } from "../../../src/user/application/DTOs/FormUserCreate"
 import { Validate } from "../../../src/infraestructure/utils/Validate"
 import { makeErrorResponse } from "../../../src/infraestructure/utils/makeResponses"
-import { CategoryDto } from "../../../src/application/DTOs/CategoryDto"
-import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
+import { CategoryDto } from "../../../src/category/application/DTOs/CategoryDto"
+import { NotFoundElement } from "../../../src/shared/infrastructure/exceptions/NotFoundElement"
 
 describe("Category [REST::CONTROLLER]", () => {
     let app!: any

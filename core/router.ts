@@ -1,9 +1,9 @@
 import express from "express"
-import routerProduct from "../src/infraestructure/rest/product/ProductRouter"
-import routerUser from "../src/infraestructure/rest/user/UserRouter"
-import routerAuth from "../src/infraestructure/rest/auth/AuthRouter"
-import routerCategory from "../src/infraestructure/rest/category/CategoryRouter"
-import routerReview from "../src/infraestructure/rest/review/ReviewRouter"
+import routerProduct from "../src/product/infrastructure/rest/ProductRouter"
+import routerUser from "../src/user/infrastructure/rest/UserRouter"
+import routerAuth from "../src/auth/infrastructure/rest/AuthRouter"
+import routerCategory from "../src/category/infrastructure/rest/CategoryRouter"
+import routerReview from "../src/review/infrastructure/rest/ReviewRouter"
 const routerApi = express.Router()
 
 routerApi.use("/product",routerProduct)

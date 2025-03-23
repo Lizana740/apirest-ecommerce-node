@@ -1,7 +1,7 @@
 import main from "../../../src/app"
 import request from "supertest"
-import { ProductDto } from "../../../src/application/DTOs/product/ProductDto"
-import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
+import { ProductDto } from "../../../src/product/application/DTOs/ProductDto"
+import { NotFoundElement } from "../../../src/shared/infrastructure/exceptions/NotFoundElement"
 
 describe("Product [REST::CONTROLLER]", () => {
   let app!: any

@@ -1,12 +1,12 @@
 import main from "../../../src/app"
 import request from "supertest"
-import { FormUserCreate } from "../../../src/application/DTOs/FormUserCreate"
+import { FormUserCreate } from "../../../src/user/application/DTOs/FormUserCreate"
 import { Validate } from "../../../src/infraestructure/utils/Validate"
 import { makeErrorResponse } from "../../../src/infraestructure/utils/makeResponses"
-import { CategoryDto } from "../../../src/application/DTOs/CategoryDto"
-import { NotFoundElement } from "../../../src/infraestructure/exceptions/NotFoundElement"
+import { CategoryDto } from "../../../src/category/application/DTOs/CategoryDto"
+import { NotFoundElement } from "../../../src/shared/infrastructure/exceptions/NotFoundElement"
 import { Review } from "../../../src/domain/entity/Review"
-import { ProductDto } from "../../../src/application/DTOs/product/ProductDto"
+import { ProductDto } from "../../../src/product/application/DTOs/ProductDto"
 
 describe("Review [REST::CONTROLLER]", () => {
     let app!: any

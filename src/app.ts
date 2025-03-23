@@ -2,7 +2,7 @@ import express from "express"
 import container from "../config/container"
 import { MongoDB } from "../config/mongo.db"
 import routerApi from "../core/router"
-import { Logger } from "../src/infraestructure/logger/Logger"
+import { Logger } from "./shared/infrastructure/logger/Logger"
 
 const dataBaseMongo = container.get<MongoDB>(MongoDB)
 
