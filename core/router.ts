@@ -6,7 +6,7 @@ import routerCategory from "../src/infraestructure/rest/category/CategoryRouter"
 import routerReview from "../src/infraestructure/rest/review/ReviewRouter"
 const routerApi = express.Router()
 
-routerApi.use("/product", routerProduct)
+routerApi.use("/product",routerProduct)
 routerApi.use("/user", routerUser)
 routerApi.use("/auth", routerAuth)
 routerApi.use("/category", routerCategory)

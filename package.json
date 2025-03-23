@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest --detectOpenHandles --coverage",
+    "test": "jest --detectOpenHandles",
     "dev": "ts-node-dev --respawn --env-file=.env index.ts",
     "create:database": "ts-node-dev --env-file=.env db.initialize.ts"
   },
@@ -14,12 +14,14 @@
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20.14.10",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "express": "^4.19.2",
     "inversify": "^6.0.2",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.3",
