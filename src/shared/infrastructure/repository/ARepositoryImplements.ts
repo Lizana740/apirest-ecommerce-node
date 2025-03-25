@@ -1,7 +1,7 @@
 import { injectable, unmanaged } from "inversify"
 import { IRepository } from "../../domain/interface/IRepository"
 import { Entity } from "../../domain/interface/Entity"
-import { MongoDB } from "../../../../config/mongo.db"
+import { MongoDB } from "../mongo.db"
 import { NameCollection } from "../../../../config/const"
 import { FilterParam } from "../../application/DTOs/FilterParam"
 

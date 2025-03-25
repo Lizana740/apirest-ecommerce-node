@@ -1,9 +1,9 @@
 import express from "express"
 import { UserController } from "./UserController"
-import container from "../../../../config/container"
-const routerUser = express.Router()
+import { baseContainer } from "../../../shared/infrastructure/base.container"
 
-const controller = container.get(UserController)
+const routerUser = express.Router()
+const controller = baseContainer.get(UserController)
 
 routerUser.post("/", controller.addUser.bind(controller))
 routerUser.get("/all", controller.getAllUser.bind(controller))

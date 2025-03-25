@@ -2,7 +2,7 @@ import { inject, injectable, optional } from "inversify"
 import { ObjectId } from "mongodb"
 import { ARepositoryImplements } from "../../../shared/infrastructure/repository/ARepositoryImplements"
 import { Product } from "../../domain/model/Product"
-import { MongoDB } from "../../../../config/mongo.db"
+import { MongoDB } from "../../../shared/infrastructure/mongo.db"
 import { NameCollection } from "../../../../config/const"
 
 

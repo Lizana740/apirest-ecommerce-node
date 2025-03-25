@@ -8,9 +8,9 @@ const routerApi = express.Router()
 
 routerApi.use("/product",routerProduct)
 routerApi.use("/user", routerUser)
-routerApi.use("/auth", routerAuth)
 routerApi.use("/category", routerCategory)
-routerApi.use("/review", routerReview)
+routerApi.use("/review", routerReview) 
+routerApi.use("/auth", routerAuth)
 
 
 export default routerApi

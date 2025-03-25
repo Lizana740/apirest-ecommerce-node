@@ -8,19 +8,19 @@ import { CategoryDeleteUseCase } from "../application/useCase/CategoryDeleteUseC
 import { CategoryFilterUseCase } from "../application/useCase/CategoryFilterUseCase"
 import { CategoryUpdateUseCase } from "../application/useCase/CategoryUpdateUseCase"
 import { CategoryController } from "./rest/CategoryController"
+import { baseContainer } from "../../shared/infrastructure/base.container"
 
-const moduleCategory = new ContainerModule((bind: interfaces.Bind) => {
-  bind<ICategoryRepository>("ICategoryRepository").to(
+
+  baseContainer.bind<ICategoryRepository>("ICategoryRepository").to(
     CategoryRepositoryImplement
   )
 
   //->>[CATEGORY]<<-/Category/
-  bind<CategoryAddUseCase>(CategoryAddUseCase).to(CategoryAddUseCase)
-  bind<CategoryGetAll>(CategoryGetAll).to(CategoryGetAll)
-  bind<CategoryGetByIdUseCase>(CategoryGetByIdUseCase).to(CategoryGetByIdUseCase)
-  bind<CategoryDeleteUseCase>(CategoryDeleteUseCase).to(CategoryDeleteUseCase)
-  bind<CategoryFilterUseCase>(CategoryFilterUseCase).to(CategoryFilterUseCase)
-  bind<CategoryUpdateUseCase>(CategoryUpdateUseCase).to(CategoryUpdateUseCase)
-  bind<CategoryController>(CategoryController).to(CategoryController)
-})
-export default moduleCategory
+  baseContainer.bind<CategoryAddUseCase>(CategoryAddUseCase).to(CategoryAddUseCase)
+  baseContainer.bind<CategoryGetAll>(CategoryGetAll).to(CategoryGetAll)
+  baseContainer.bind<CategoryGetByIdUseCase>(CategoryGetByIdUseCase).to(CategoryGetByIdUseCase)
+  baseContainer.bind<CategoryDeleteUseCase>(CategoryDeleteUseCase).to(CategoryDeleteUseCase)
+  baseContainer.bind<CategoryFilterUseCase>(CategoryFilterUseCase).to(CategoryFilterUseCase)
+  baseContainer.bind<CategoryUpdateUseCase>(CategoryUpdateUseCase).to(CategoryUpdateUseCase)
+  baseContainer.bind<CategoryController>(CategoryController).to(CategoryController)
+

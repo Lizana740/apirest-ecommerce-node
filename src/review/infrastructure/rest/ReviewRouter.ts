@@ -1,9 +1,9 @@
 import express from "express"
 import { ReviewController } from "./ReviewController"
-import container from "../../../../config/container"
+import { baseContainer } from "../../../shared/infrastructure/base.container"
 const routerReview = express.Router()
 
-const controller = container.get(ReviewController)
+const controller = baseContainer.get(ReviewController)
 
 routerReview.post("/", controller.addReview.bind(controller))
 routerReview.get("/all", controller.getAllReviews.bind(controller))

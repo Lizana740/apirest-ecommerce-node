@@ -3,7 +3,7 @@ import { ARepositoryImplements } from "../../../shared/infrastructure/repository
 import { ObjectId } from "mongodb"
 import { NameCollection } from "../../../../config/const"
 import { User } from "../../domain/model/User"
-import { MongoDB } from "../../../../config/mongo.db"
+import { MongoDB } from "../../../shared/infrastructure/mongo.db"
 
 @injectable()
 export class UserRepositoryImplement extends ARepositoryImplements<

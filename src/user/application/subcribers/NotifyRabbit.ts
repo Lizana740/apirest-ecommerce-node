@@ -1,26 +1,19 @@
-import { injectable, inject } from "inversify"
+import { injectable } from "inversify"
 import { DomainEventSubscriber } from "../../../shared/domain/interface/DomainEventSubscriber"
 import { UserCreatedDomainEvent } from "../../domain/event/UserCreatedDomainEvent"
-import { SendWelcomeEmail } from "../useCases/SendWelcomeEmail"
 import { DomainEventClass } from "../../../shared/domain/interface/DomainEvent"
 
 @injectable()
-export class SendWelcomeEmailOnUserCreated
+export class NotifyRabbit
   implements DomainEventSubscriber<UserCreatedDomainEvent>
 {
-  public constructor(
-    @inject(SendWelcomeEmail)
-    private sendWelcomeEmail: SendWelcomeEmail
-  ) {}
+  public constructor() {}
 
   subscribedTo(): Array<DomainEventClass> {
     return [UserCreatedDomainEvent]
   }
 
   async on(userCreatedDomainEvent: UserCreatedDomainEvent) {
-    await this.sendWelcomeEmail.execute(
-      userCreatedDomainEvent.name,
-      userCreatedDomainEvent.email
-    )
+    console.log("NOtificando Rabbit")
   }
 }

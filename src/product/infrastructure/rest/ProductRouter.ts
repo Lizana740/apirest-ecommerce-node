@@ -1,9 +1,9 @@
 import express from "express"
 import { ProductController } from "./ProductController"
-import container from "../../../../config/container"
+import { baseContainer } from "../../../shared/infrastructure/base.container"
 const routerProduct = express.Router()
 
-const controller = container.get(ProductController)
+const controller = baseContainer.get(ProductController)
 
 
 routerProduct.post("/",controller.addProduct.bind(controller))

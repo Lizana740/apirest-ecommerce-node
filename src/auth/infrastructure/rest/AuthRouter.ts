@@ -1,9 +1,10 @@
 import express from "express"
+import { baseContainer } from "../../../shared/infrastructure/base.container"
 import { AuthController } from "./AuthController"
-import container from "../../../../config/container"
+
 const routerAuth = express.Router()
 
-const controller = container.get(AuthController)
+const controller = baseContainer.get(AuthController)
 
 routerAuth.post("/", controller.login.bind(controller))
 

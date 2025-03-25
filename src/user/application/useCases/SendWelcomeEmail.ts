@@ -5,19 +5,10 @@ import { IUserRepository } from "../../domain/repository/IUserRepository"
 @injectable()
 export class SendWelcomeEmail {
     constructor(
-      @inject('IUserRepository') private userRepository: IUserRepository,
-      @inject('EmailService') private emailService: IEmailService
+      @inject('IUserRepository') private userRepository: IUserRepository
     ) {}
 
-    async execute(userId:string ): Promise<void> {     
-      try {
-        const user = await this.userRepository.getById(userId)
-        if(!user){
-            throw new Error('User not found')
-        }
-        await this.emailService.send(user.getEmail)
-      } catch(error: any) {
-        // save error in tracing service
-      }
+    async execute(name:string, email:string): Promise<void> {     
+      console.log(`Se a enviado un correo a ${name} : ${email}`)
     }
 }

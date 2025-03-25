@@ -3,6 +3,7 @@ import { IUseCase } from "../../../shared/domain/interface/IUseCase"
 import { ArrayFilter } from "../../../shared/application/DTOs/FilterParam"
 import { IUserRepository } from "../../domain/repository/IUserRepository"
 import { User } from "../../domain/model/User"
+
 @injectable()
 export class UserFilterUseCase implements IUseCase {
     constructor(

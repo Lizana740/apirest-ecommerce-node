@@ -1,9 +1,9 @@
 import express from "express"
 import { CategoryController } from "./CategoryController"
-import container from "../../../../config/container"
+import { baseContainer } from "../../../shared/infrastructure/base.container"
 const routerCategory = express.Router()
 
-const controller = container.get(CategoryController)
+const controller = baseContainer.get(CategoryController)
 
 routerCategory.post("/", controller.addCategory.bind(controller))
 routerCategory.get("/all", controller.getAllCategory.bind(controller))

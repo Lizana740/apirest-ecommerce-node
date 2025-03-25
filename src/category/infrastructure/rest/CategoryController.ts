@@ -1,6 +1,5 @@
 
 import { CategoryGetByIdUseCase } from "../../../category/application/useCase/CategoryGetByIdUseCase"
-
 import { Response, Request } from "express"
 import { CategoryDeleteUseCase } from "../../../category/application/useCase/CategoryDeleteUseCase"
 import { CategoryAddUseCase } from "../../../category/application/useCase/CategoryAddUseCase"

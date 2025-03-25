@@ -1,8 +1,5 @@
-import { ContainerModule, interfaces } from "inversify"
-
 import { AuthController } from "./rest/AuthController"
+import { baseContainer } from "../../shared/infrastructure/base.container"
 
-const moduleAuth = new ContainerModule((bind: interfaces.Bind) => {
-  bind<AuthController>(AuthController).to(AuthController)
-})
-export default moduleAuth
+baseContainer.bind<AuthController>(AuthController).to(AuthController)
+

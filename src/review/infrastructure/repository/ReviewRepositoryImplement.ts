@@ -1,5 +1,5 @@
 import { inject, injectable } from "inversify"
-import { MongoDB } from "../../../../config/mongo.db"
+import { MongoDB } from "../../../shared/infrastructure/mongo.db"
 import { ObjectId } from "mongodb"
 import { NameCollection } from "../../../../config/const"
 import { ARepositoryImplements } from "../../../shared/infrastructure/repository/ARepositoryImplements"

@@ -1,13 +1,18 @@
+import "reflect-metadata"
 import express from "express"
-import container from "../config/container"
-import { MongoDB } from "../config/mongo.db"
+import { container } from "./shared/infrastructure/container"
+import { MongoDB } from "./shared/infrastructure/mongo.db"
 import routerApi from "../core/router"
 import { Logger } from "./shared/infrastructure/logger/Logger"
+import { EventBus } from "./shared/domain/interface/EventBus"
+import { DomainEventSubscribers } from "./shared/domain/interface/DomainEventSubscribers"
 
 const dataBaseMongo = container.get<MongoDB>(MongoDB)
+const eventBus = container.get<EventBus>('EventBus')
 
 const main = async (consol: boolean = false) => {
     try {
+        eventBus.addSubscribers(DomainEventSubscribers.from(container))
         await dataBaseMongo.connect()
         if (consol) {
             console.log("[OK] --> Conection MongoDB")

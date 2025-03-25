@@ -1,4 +1,3 @@
-import { Container, ContainerModule, interfaces } from "inversify"
 import { ReviewAddUseCase } from "../application/useCase/ReviewAddUseCase"
 import { ReviewDeleteUseCase } from "../application/useCase/ReviewDeleteUseCase"
 import { ReviewFilterUseCase } from "../application/useCase/ReviewFilterUseCase"
@@ -7,17 +6,17 @@ import { ReviewGetByIdUseCase } from "../application/useCase/ReviewGetByIdUseCas
 import { IReviewRepository } from "../domain/repository/IReviewRepository"
 import { ReviewRepositoryImplement } from "./repository/ReviewRepositoryImplement"
 import { ReviewController } from "./rest/ReviewController"
+import { baseContainer } from "../../shared/infrastructure/base.container"
 
-const moduleReview = new ContainerModule((bind: interfaces.Bind) => {
-  bind<IReviewRepository>("IReviewRepository").to(ReviewRepositoryImplement)
+
+  baseContainer.bind<IReviewRepository>("IReviewRepository").to(ReviewRepositoryImplement)
 
   //->>[REVIEW]<<-/Review/
-  bind<ReviewAddUseCase>(ReviewAddUseCase).to(ReviewAddUseCase)
-  bind<ReviewGetAll>(ReviewGetAll).to(ReviewGetAll)
-  bind<ReviewFilterUseCase>(ReviewFilterUseCase).to(ReviewFilterUseCase)
-  bind<ReviewDeleteUseCase>(ReviewDeleteUseCase).to(ReviewDeleteUseCase)
-  bind<ReviewGetByIdUseCase>(ReviewGetByIdUseCase).to(ReviewGetByIdUseCase)
+  baseContainer.bind<ReviewAddUseCase>(ReviewAddUseCase).to(ReviewAddUseCase)
+  baseContainer.bind<ReviewGetAll>(ReviewGetAll).to(ReviewGetAll)
+  baseContainer.bind<ReviewFilterUseCase>(ReviewFilterUseCase).to(ReviewFilterUseCase)
+  baseContainer.bind<ReviewDeleteUseCase>(ReviewDeleteUseCase).to(ReviewDeleteUseCase)
+  baseContainer.bind<ReviewGetByIdUseCase>(ReviewGetByIdUseCase).to(ReviewGetByIdUseCase)
 
-  bind<ReviewController>(ReviewController).to(ReviewController)
-})
-export default moduleReview
+  baseContainer.bind<ReviewController>(ReviewController).to(ReviewController)
+

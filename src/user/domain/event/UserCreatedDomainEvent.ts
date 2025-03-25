@@ -1,7 +1,5 @@
 import { DomainEvent } from "../../../shared/domain/interface/DomainEvent"
 
-
-
 type CreateUserDomainEventAttributes = {
   readonly name: string
   readonly email: string
