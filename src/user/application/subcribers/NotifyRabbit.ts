@@ -4,16 +4,14 @@ import { UserCreatedDomainEvent } from "../../domain/event/UserCreatedDomainEven
 import { DomainEventClass } from "../../../shared/domain/interface/DomainEvent"
 
 @injectable()
-export class NotifyRabbit
-  implements DomainEventSubscriber<UserCreatedDomainEvent>
-{
-  public constructor() {}
+export class NotifyRabbit implements DomainEventSubscriber<UserCreatedDomainEvent> {
+	public constructor() {}
 
-  subscribedTo(): Array<DomainEventClass> {
-    return [UserCreatedDomainEvent]
-  }
+	subscribedTo(): DomainEventClass {
+		return UserCreatedDomainEvent
+	}
 
-  async on(userCreatedDomainEvent: UserCreatedDomainEvent) {
-    console.log("NOtificando Rabbit")
-  }
+	async on(userCreatedDomainEvent: UserCreatedDomainEvent) {
+		console.log("NOtificando Rabbit")
+	}
 }

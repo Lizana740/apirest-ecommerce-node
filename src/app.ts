@@ -8,7 +8,7 @@ import { EventBus } from "./shared/domain/interface/EventBus"
 import { DomainEventSubscribers } from "./shared/domain/interface/DomainEventSubscribers"
 
 const dataBaseMongo = container.get<MongoDB>(MongoDB)
-const eventBus = container.get<EventBus>('EventBus')
+const eventBus = container.get<EventBus>("EventBus")
 
 const main = async (consol: boolean = false) => {
     try {

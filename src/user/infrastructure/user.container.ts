@@ -15,28 +15,20 @@ import { NotifyRabbit } from "../application/subcribers/NotifyRabbit"
 import { baseContainer } from "../../shared/infrastructure/base.container"
 
 // Repository
-baseContainer
-  .bind<IUserRepository>("IUserRepository")
-  .to(UserRepositoryImplement)
+baseContainer.bind<IUserRepository>("IUserRepository").to(UserRepositoryImplement)
 
 // UseCases
 baseContainer.bind<UserAddUseCase>(UserAddUseCase).to(UserAddUseCase)
 baseContainer.bind<UserGetAll>(UserGetAll).to(UserGetAll)
-baseContainer
-  .bind<UserGetByIdUseCase>(UserGetByIdUseCase)
-  .to(UserGetByIdUseCase)
+baseContainer.bind<UserGetByIdUseCase>(UserGetByIdUseCase).to(UserGetByIdUseCase)
 baseContainer.bind<UserDeleteUseCase>(UserDeleteUseCase).to(UserDeleteUseCase)
 baseContainer.bind<UserFilterUseCase>(UserFilterUseCase).to(UserFilterUseCase)
 baseContainer.bind<UserUpdateUseCase>(UserUpdateUseCase).to(UserUpdateUseCase)
 baseContainer.bind<SendWelcomeEmail>(SendWelcomeEmail).to(SendWelcomeEmail)
 
 // Subscribers
-baseContainer
-  .bind<DomainEventSubscriber<DomainEvent>>("DomainEventSubscriber")
-  .to(SendWelcomeEmailOnUserCreated)
-baseContainer
-  .bind<DomainEventSubscriber<DomainEvent>>("DomainEventSubscriber")
-  .to(NotifyRabbit)
+baseContainer.bind<DomainEventSubscriber<DomainEvent>>("DomainEventSubscriber").to(SendWelcomeEmailOnUserCreated)
+baseContainer.bind<DomainEventSubscriber<DomainEvent>>("DomainEventSubscriber").to(NotifyRabbit)
 
 // Controller
 baseContainer.bind<UserController>(UserController).to(UserController)

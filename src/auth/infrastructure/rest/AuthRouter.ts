@@ -7,5 +7,6 @@ const routerAuth = express.Router()
 const controller = baseContainer.get(AuthController)
 
 routerAuth.post("/", controller.login.bind(controller))
+routerAuth.get("/refresh-token", controller.refreshToken.bind(controller))
 
 export default routerAuth

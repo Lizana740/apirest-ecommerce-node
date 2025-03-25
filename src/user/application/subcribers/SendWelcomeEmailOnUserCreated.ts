@@ -5,22 +5,14 @@ import { SendWelcomeEmail } from "../useCases/SendWelcomeEmail"
 import { DomainEventClass } from "../../../shared/domain/interface/DomainEvent"
 
 @injectable()
-export class SendWelcomeEmailOnUserCreated
-  implements DomainEventSubscriber<UserCreatedDomainEvent>
-{
-  public constructor(
-    @inject(SendWelcomeEmail)
-    private sendWelcomeEmail: SendWelcomeEmail
-  ) {}
+export class SendWelcomeEmailOnUserCreated implements DomainEventSubscriber<UserCreatedDomainEvent> {
+    public constructor(@inject(SendWelcomeEmail) private sendWelcomeEmail: SendWelcomeEmail) {}
 
-  subscribedTo(): Array<DomainEventClass> {
-    return [UserCreatedDomainEvent]
-  }
+    subscribedTo(): DomainEventClass {
+        return UserCreatedDomainEvent
+    }
 
-  async on(userCreatedDomainEvent: UserCreatedDomainEvent) {
-    await this.sendWelcomeEmail.execute(
-      userCreatedDomainEvent.name,
-      userCreatedDomainEvent.email
-    )
-  }
+    async on(userCreatedDomainEvent: UserCreatedDomainEvent) {
+        await this.sendWelcomeEmail.execute(userCreatedDomainEvent.name, userCreatedDomainEvent.email)
+    }
 }

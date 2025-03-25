@@ -10,7 +10,6 @@ import { baseContainer } from "../../shared/infrastructure/base.container"
 
 baseContainer.bind<IProductRepository>("IProductRepository").to(ProductRepositoryImplement)
 
-
 baseContainer.bind<ProductAddUseCase>(ProductAddUseCase).to(ProductAddUseCase)
 baseContainer.bind<ProductGetAll>(ProductGetAll).to(ProductGetAll)
 baseContainer.bind<ProductDeleteUseCase>(ProductDeleteUseCase).to(ProductDeleteUseCase)
