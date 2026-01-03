@@ -1,143 +1,34 @@
-import { NameCollection } from "./config/const"
-import container from "./config/container"
-import { MongoDB } from "./config/mongo.db"
 
-const mongo = container.get<MongoDB>(MongoDB)
+import { Pool } from "pg";
 
-const initialDb = async () => {
-    await mongo.connect()
-    await mongo.conection.dropCollection(NameCollection.product)
-    await mongo.conection.dropCollection(NameCollection.user)
-    await mongo.conection.dropCollection(NameCollection.category)
-    await mongo.conection.dropCollection(NameCollection.review)
+const db = new Pool({
+    user: process.env.DB_USER ?? "error",
+    host: process.env.DB_HOST ?? "error",
+    database: process.env.DB_DATABASE ?? "error",
+    password: process.env.DB_PASSWORD ?? "error",
+    port: Number(process.env.DB_PORT ?? "error"),
+    max: Number(process.env.DB_MAX ?? "error"),
+    idleTimeoutMillis: Number(process.env.DB_IDLE_TIMEOUT ?? "error"),
+    connectionTimeoutMillis: Number(process.env.DB_CONNECTION_TIMEOUT ?? "error"),
+})
 
-    await mongo.conection.createCollection(NameCollection.product, {
-        validator: {
-            $jsonSchema: {
-                bsonType: "object",
-                required: ["name", "description", "price", "quantity", "path"],
-                properties: {
-                    name: {
-                        bsonType: "string",
-                    },
-                    description: {
-                        bsonType: "string",
-                    },
-                    price: {
-                        bsonType: "number",
-                        minimum: 1,
-                    },
-                    quantity: {
-                        bsonType: "number",
-                        minimum: 0,
-                    },
-                    path: {
-                        bsonType: "string",
-                    },
-                },
-            },
-        },
-    })
-
-    await mongo.conection.createCollection(NameCollection.user, {
-        validator: {
-            $jsonSchema: {
-                bsonType: "object",
-                required: [
-                    "name",
-                    "lastname",
-                    "email",
-                    "password_hash",
-                    "address",
-                ],
-                properties: {
-                    name: {
-                        bsonType: "string",
-                    },
-                    lastname: {
-                        bsonType: "string",
-                    },
-                    email: {
-                        bsonType: "string",
-                        pattern: "^.+@.+..+$",
-                    },
-                    password_hash: {
-                        bsonType: "string",
-                    },
-                    address: {
-                        bsonType: "string",
-                    },
-                },
-            },
-        },
-    })
-
-    await mongo.conection
-        .collection(NameCollection.user)
-        .createIndex({ email: 1 }, { unique: true })
-
-    await mongo.conection.createCollection(NameCollection.category, {
-        validator: {
-            $jsonSchema: {
-                bsonType: "object",
-                required: ["name", "description"],
-                properties: {
-                    name: {
-                        bsonType: "string",
-                    },
-                    description: {
-                        bsonType: "string",
-                    },
-                },
-            },
-        },
-    })
-    await mongo.conection
-        .collection(NameCollection.category)
-        .createIndex({ name: 1 }, { unique: true })
-
-    await mongo.conection.createCollection(NameCollection.review, {
-        validator: {
-            $jsonSchema: {
-                bsonType: "object",
-                required: ["product_id", "user_id", "coment", "point", "date"],
-                properties: {
-                    point: {
-                        bsonType: "int",
-                        maximum: 5,
-                        minimum: 1,
-                    },
-                    coment: {
-                        bsonType: "string",
-                        minLength: 25,
-                        maxLength: 1000,
-                    },
-                    product_id: {
-                        bsonType: "objectId",
-                    },
-                    user_id: {
-                        bsonType: "objectId",
-                    },
-                    data: {
-                        bsonType: "date",
-                    },
-                },
-            },
-        },
-    })
-    await mongo.conection
-        .collection(NameCollection.review)
-        .createIndex({ product_id: 1, user_id: 1, date: 1 }, { unique: true })
-    
+async function poblarDB() {
+    const names = ['Juan', 'Pedro', 'Marcelo', 'Jorge', 'Miguel', 'Maria', 'Ana', 'Sofia', 'Luis', 'Fernando']
+    const lastnames = ['Perez', 'Garcia', 'Rodriguez', 'Gonzalez', 'Hernandez', 'Lopez', 'Martinez', 'Diaz', 'Sanchez', 'Romero']
+    const emails = ['@gmail.com', '@hotmail.com', '@yahoo.com', '@outlook.com']
+    const addresses = ['Calle 1', 'Calle 2', 'Calle 3', 'Calle 4', 'Calle 5', 'Avenida 1', 'Avenida 2', 'Avenida 3', 'Avenida 4', 'Avenida 5']
+    const data = Array.from({length: 100}, () => ({
+        name: names[Math.floor(Math.random() * names.length)],
+        lastname: lastnames[Math.floor(Math.random() * lastnames.length)],
+        email: `${names[Math.floor(Math.random() * names.length)]}.${lastnames[Math.floor(Math.random() * lastnames.length)]}${emails[Math.floor(Math.random() * emails.length)]}`,
+        address: addresses[Math.floor(Math.random() * addresses.length)]
+    }))
+    const sql = `INSERT INTO public.client
+        (name, last_name, email, address)
+        VALUES ${data.map(i => `('${i.name}', '${i.lastname}', '${i.email}', '${i.address}')`).join(', ')}`
+    await db.query(sql)
 }
 
-initialDb()
-    .then(() => {
-        console.log("base de datos creada")
-    })
-    .catch((e) => {
-        console.log("Error", e)
-    })
-    .finally(() => {
-        return
-    })
+poblarDB().then(()=> {
+    console.log("base da datos poblada")
+}).catch((e)=> {console.log(e)})

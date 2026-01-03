@@ -3,9 +3,9 @@ import { ReviewDto } from "../../../review/application/DTOs/ReviewDto"
 import { IUseCase } from "../../../shared/domain/interface/IUseCase"
 import { IReviewRepository } from "../../domain/repository/IReviewRepository"
 import { IProductRepository } from "../../../product/domain/repository/IProductRepository"
-import { UserNotFound } from "../../../user/application/exception/UserNotFound"
+import { UserNotFound } from "../../../client/application/exception/UserNotFound"
 import { ProductNotFound } from "../../../product/application/exception/ProductNotFound"
-import { IUserRepository } from "../../../user/domain/repository/IUserRepository"
+import { IUserRepository } from "../../../client/domain/repository/IClientRepository"
 import { Review } from "../../domain/model/Review"
 
 @injectable()

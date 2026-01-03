@@ -3,6 +3,7 @@ import { DomainEvent } from "../../domain/interface/DomainEvent"
 import { EventEmitter } from "stream"
 import { EventBus } from "../../domain/interface/EventBus"
 import { DomainEventSubscribers } from "../../domain/interface/DomainEventSubscribers"
+import { DomainEventSubscriber } from "../../domain/interface/DomainEventSubscriber"
 
 @injectable()
 export class InMemoryAsyncEventBus extends EventEmitter implements EventBus {
@@ -11,7 +12,7 @@ export class InMemoryAsyncEventBus extends EventEmitter implements EventBus {
   }
 
   addSubscribers(subscribers: DomainEventSubscribers) {
-    subscribers.items.forEach(subscriber => {
+    subscribers.items.forEach((subscriber:DomainEventSubscriber<DomainEvent>) => {
       this.on(
         subscriber.subscribedTo().EVENT_NAME, 
         subscriber.on.bind(subscriber))

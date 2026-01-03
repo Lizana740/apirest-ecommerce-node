@@ -1,6 +1,6 @@
 import main from "../../../src/app"
 import request from "supertest"
-import { FormUserCreate } from "../../../src/user/application/DTOs/FormUserCreate"
+import { FormUserCreate } from "../../../src/client/application/DTOs/FormUserCreate"
 import { Validate } from "../../../src/infraestructure/utils/Validate"
 import { makeErrorResponse } from "../../../src/infraestructure/utils/makeResponses"
 import { CategoryDto } from "../../../src/category/application/DTOs/CategoryDto"

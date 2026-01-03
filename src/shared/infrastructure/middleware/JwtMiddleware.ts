@@ -22,9 +22,10 @@ export class JwtMiddleware {
 					})
 				}
 			} catch (err) {
-				res.status(500).send({
+				console.log(err)
+				res.status(401).send({
 					success: false,
-					message: "Ocurrió un error al obtener/validar la sesión",
+					message: "Error al obtener/validar la sesión",
 					token_error_code: "TOKEN_ERR",
 				})
 			}

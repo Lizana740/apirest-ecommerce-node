@@ -1,6 +1,6 @@
 import { inject, injectable, optional } from "inversify"
 import { ObjectId } from "mongodb"
-import { ARepositoryImplements } from "../../../shared/infrastructure/repository/ARepositoryImplements"
+import { ARepositoryImplements } from "../../../shared/infrastructure/repository/ARepositoryMongoImplement"
 import { MongoDB } from "../../../shared/infrastructure/mongo.db"
 import { Category } from "../../domain/model/Category"
 import { NameCollection } from "../../../../config/const"

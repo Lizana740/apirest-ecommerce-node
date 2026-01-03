@@ -1,6 +1,6 @@
 import { Entity } from "./Entity"
 
-export interface IRepository<T extends Entity, P> {
+export interface IRepository<T, P> {
     getById(id: P): Promise<T|null>
     getAll(): Promise<T[]>
     deleteById(id: P): Promise<void>

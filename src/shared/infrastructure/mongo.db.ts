@@ -16,6 +16,6 @@ export class MongoDB extends MongoClient {
         await this.connect()
     }
     get conection() {
-        return this.db("store")
+        return this.db("tienda")
     }
 }

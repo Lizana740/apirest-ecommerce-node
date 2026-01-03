@@ -1,6 +1,3 @@
 export const NameCollection = {
-    product: "product",
-    user: "user",
-    category: "category",
-    review:"review"
+    user: "user"
 }

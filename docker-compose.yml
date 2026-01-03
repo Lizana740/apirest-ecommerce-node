@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  web-api:
+    build: ./docker/
+    container_name: api-ecommerce-node
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
